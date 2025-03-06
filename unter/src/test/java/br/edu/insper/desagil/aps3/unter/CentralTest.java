@@ -1,84 +1,60 @@
 public class CentralTest {
-    public static void main(String[] args) {
-        testNenhumaAvaliacaoPassageiro();
-        testNenhumaAvaliacaoMotorista();
-        testAvaliacoesPassageiro();
-        testAvaliacoesMotorista();
-
-        System.out.println("Todos os testes foram executados com sucesso.");
+    public static void nenhumaAvaliacaoPassageiro() {
+        Central central = new Central();
+        System.out.println(central.mediaPassageiro("999") == 0.0);
     }
 
-    static void testNenhumaAvaliacaoPassageiro() {
+    public static void nenhumaAvaliacaoMotorista() {
         Central central = new Central();
-        if (central.mediaPassageiro() != 0) {
-            System.out.println("Erro: mediaPassageiro deveria ser 0.");
-        }
+        System.out.println(central.mediaMotorista("888") == 0.0);
     }
 
-    static void testNenhumaAvaliacaoMotorista() {
+    public static void avaliacoesPassageiro() {
         Central central = new Central();
-        if (central.mediaMotorista() != 0) {
-            System.out.println("Erro: mediaMotorista deveria ser 0.");
-        }
+        Passageiro p1 = new Passageiro();
+        p1.setCpf("111");
+        Corrida c1 = new Corrida(p1);
+        Corrida c2 = new Corrida(p1);
+        Corrida c3 = new Corrida(p1);
+        c1.avaliaPassageiro(0);
+        c2.avaliaPassageiro(4);
+        c3.avaliaPassageiro(5);
+        Passageiro p2 = new Passageiro();
+        p2.setCpf("222");
+        Corrida c4 = new Corrida(p2);
+        c4.avaliaPassageiro(3);
+        central.adiciona(c1);
+        central.adiciona(c2);
+        central.adiciona(c3);
+        central.adiciona(c4);
+        System.out.println(central.mediaPassageiro("111") == 4.5);
     }
 
-    static void testAvaliacoesPassageiro() {
+    public static void avaliacoesMotorista() {
         Central central = new Central();
-
-        Motorista motorista = new Motorista("11111111111", "Carlos");
-        Passageiro passageiro1 = new Passageiro("22222222222", "Ana");
-        Passageiro passageiro2 = new Passageiro("33333333333", "Lucas");
-
-        Corrida corrida1 = new Corrida(motorista, passageiro1);
-        Corrida corrida2 = new Corrida(motorista, passageiro1);
-        Corrida corrida3 = new Corrida(motorista, passageiro1);
-        Corrida corrida4 = new Corrida(motorista, passageiro2);
-
-        corrida1.setNotaPassageiro(0);
-        corrida2.setNotaPassageiro(4);
-        corrida3.setNotaPassageiro(5);
-        corrida4.setNotaPassageiro(3);
-
-        central.adiciona(corrida1);
-        central.adiciona(corrida2);
-        central.adiciona(corrida3);
-        central.adiciona(corrida4);
-
-        double mediaEsperada = 4.5;
-        if (Math.abs(central.mediaPassageiro() - mediaEsperada) > 0.01) {
-            System.out.println("Erro: mediaPassageiro deveria ser " + mediaEsperada);
-        }
-    }
-
-    static void testAvaliacoesMotorista() {
-        Central central = new Central();
-
-        Motorista motorista1 = new Motorista("11111111111", "Carlos");
-        Motorista motorista2 = new Motorista("44444444444", "João");
-
-        Passageiro passageiro = new Passageiro("22222222222", "Ana");
-
-        Corrida corrida1 = new Corrida(motorista1, passageiro);
-        Corrida corrida2 = new Corrida(motorista1, passageiro);
-        Corrida corrida3 = new Corrida(motorista1, passageiro);
-        Corrida corrida4 = new Corrida(motorista2, passageiro);
-        Corrida corrida5 = new Corrida(null, passageiro);
-
-        corrida1.setNotaMotorista(0);
-        corrida2.setNotaMotorista(2);
-        corrida3.setNotaMotorista(3);
-        corrida4.setNotaMotorista(1);
-        corrida5.setNotaMotorista(1);
-
-        central.adiciona(corrida1);
-        central.adiciona(corrida2);
-        central.adiciona(corrida3);
-        central.adiciona(corrida4);
-        central.adiciona(corrida5);
-
-        double mediaEsperada = 2.5;
-        if (Math.abs(central.mediaMotorista() - mediaEsperada) > 0.01) {
-            System.out.println("Erro: mediaMotorista deveria ser " + mediaEsperada);
-        }
+        Motorista m1 = new Motorista();
+        m1.setCpf("333");
+        Corrida c1 = new Corrida(new Passageiro());
+        Corrida c2 = new Corrida(new Passageiro());
+        Corrida c3 = new Corrida(new Passageiro());
+        c1.setMotorista(m1);
+        c2.setMotorista(m1);
+        c3.setMotorista(m1);
+        c1.avaliaMotorista(0);
+        c2.avaliaMotorista(2);
+        c3.avaliaMotorista(3);
+        Motorista m2 = new Motorista();
+        m2.setCpf("444");
+        Corrida c4 = new Corrida(new Passageiro());
+        c4.setMotorista(m2);
+        c4.avaliaMotorista(1);
+        Corrida c5 = new Corrida(new Passageiro());
+        c5.avaliaMotorista(1);
+        central.adiciona(c1);
+        central.adiciona(c2);
+        central.adiciona(c3);
+        central.adiciona(c4);
+        central.adiciona(c5);
+        System.out.println(central.mediaMotorista("333") == 2.5);
     }
 }

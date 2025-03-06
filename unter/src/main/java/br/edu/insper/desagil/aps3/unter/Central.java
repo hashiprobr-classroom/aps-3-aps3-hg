@@ -1,51 +1,34 @@
+package br.edu.insper.desagil.aps3.unter;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class Central {
-    private List<Corrida> corridas;
-
-    public Central() {
-        this.corridas = new ArrayList<>();
-    }
+    private List<Corrida> corridas = new ArrayList<>();
 
     public void adiciona(Corrida corrida) {
         corridas.add(corrida);
     }
-    public double mediaPassageiro() {
-        if (corridas.isEmpty()) {
-            return 0;
-        }
-        double soma = 0;
-        int totalNotas = 0;
+
+    public double mediaPassageiro(String cpf) {
+        int soma = 0, qtd = 0;
         for (Corrida corrida : corridas) {
-            int nota = corrida.getNotaPassageiro();
-            if (nota > 0) {
-                soma += nota;
-                totalNotas++;
+            if (corrida.getPassageiro().getCpf().equals(cpf) && corrida.getNotaPassageiro() != 0) {
+                soma += corrida.getNotaPassageiro();
+                qtd++;
             }
         }
-        return totalNotas == 0 ? 0 : soma / totalNotas;
+        return qtd == 0 ? 0 : (double) soma / qtd;
     }
 
-
-    public double mediaMotorista() {
-        if (corridas.isEmpty()) {
-            return 0;
-        }
-        double soma = 0;
-        int totalNotas = 0;
+    public double mediaMotorista(String cpf) {
+        int soma = 0, qtd = 0;
         for (Corrida corrida : corridas) {
-            int nota = corrida.getNotaMotorista();
-            if (nota > 0) {
-                soma += nota;
-                totalNotas++;
+            if (corrida.getMotorista() != null && corrida.getMotorista().getCpf().equals(cpf) && corrida.getNotaMotorista() != 0) {
+                soma += corrida.getNotaMotorista();
+                qtd++;
             }
         }
-        return totalNotas == 0 ? 0 : soma / totalNotas;
-    }
-
-
-    public List<Corrida> getCorridas() {
-        return new ArrayList<>(corridas);
+        return qtd == 0 ? 0 : (double) soma / qtd;
     }
 }

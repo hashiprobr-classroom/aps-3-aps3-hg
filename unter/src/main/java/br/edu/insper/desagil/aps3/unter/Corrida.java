@@ -1,14 +1,13 @@
+package br.edu.insper.desagil.aps3.unter;
+
 public class Corrida {
     private Passageiro passageiro;
-    private Motorista motorista;
-    private int notaPassageiro;
-    private int notaMotorista;
+    private Motorista motorista = null;
+    private int notaPassageiro = 0;
+    private int notaMotorista = 0;
 
     public Corrida(Passageiro passageiro) {
         this.passageiro = passageiro;
-        this.motorista = null;
-        this.notaPassageiro = 0;
-        this.notaMotorista = 0;
     }
 
     public Passageiro getPassageiro() {
@@ -31,20 +30,17 @@ public class Corrida {
         return notaMotorista;
     }
 
-    private int truncarNota(int nota) {
-        if (nota < 1) {
-            return 1;
-        } else if (nota > 5) {
-            return 5;
-        }
+    private int truncaNota(int nota) {
+        if (nota < 1) return 1;
+        if (nota > 5) return 5;
         return nota;
     }
 
-    public void setNotaPassageiro(int nota) {
-        this.notaPassageiro = truncarNota(nota);
+    public void avaliaPassageiro(int nota) {
+        this.notaPassageiro = truncaNota(nota);
     }
 
-    public void setNotaMotorista(int nota) {
-        this.notaMotorista = truncarNota(nota);
+    public void avaliaMotorista(int nota) {
+        this.notaMotorista = truncaNota(nota);
     }
 }

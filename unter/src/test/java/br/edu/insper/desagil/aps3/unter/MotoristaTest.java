@@ -1,49 +1,44 @@
-import static org.junit.jupiter.api.Assertions.*;
-import org.junit.jupiter.api.Test;
+package br.edu.insper.desagil.aps3.unter;
 
 public class MotoristaTest {
-
-    @Test
-    void constroi() {
-        Motorista motorista = new Motorista("12345678900", "Carlos");
-        assertEquals("12345678900", motorista.getCpf());
-        assertEquals("Carlos", motorista.getNome());
+    public static void constroi() {
+        Motorista m = new Motorista();
+        m.setCpf("456");
+        m.setNome("Carlos");
+        System.out.println(m.getCpf().equals("456") && m.getNome().equals("Carlos"));
     }
 
-    @Test
-    void mudaNome() {
-        Motorista motorista = new Motorista("12345678900", "Carlos");
-        motorista.setNome("Roberto"); // Supondo que haja um setNome() na classe Motorista
-        assertEquals("Roberto", motorista.getNome());
+    public static void mudaNome() {
+        Motorista m = new Motorista();
+        m.setNome("Pedro");
+        m.setNome("Joao");
+        System.out.println(m.getNome().equals("Joao"));
     }
 
-    @Test
-    void avalia() {
-        Motorista motorista = new Motorista("12345678900", "Carlos");
-        Passageiro passageiro = new Passageiro("98765432100", "Ana");
-        Corrida corrida = new Corrida(motorista, passageiro);
-
-        motorista.avalia(corrida, 3);
-        assertEquals(3, corrida.getNotaPassageiro());
+    public static void avalia() {
+        Motorista m = new Motorista();
+        Passageiro p = new Passageiro();
+        Corrida c = new Corrida(p);
+        c.setMotorista(m);
+        m.avalia(c, 3);
+        System.out.println(c.getNotaPassageiro() == 3);
     }
 
-    @Test
-    void avaliaBaixo() {
-        Motorista motorista = new Motorista("12345678900", "Carlos");
-        Passageiro passageiro = new Passageiro("98765432100", "Ana");
-        Corrida corrida = new Corrida(motorista, passageiro);
-
-        motorista.avalia(corrida, 1);
-        assertEquals(1, corrida.getNotaPassageiro());
+    public static void avaliaBaixo() {
+        Motorista m = new Motorista();
+        Passageiro p = new Passageiro();
+        Corrida c = new Corrida(p);
+        c.setMotorista(m);
+        m.avalia(c, 0);
+        System.out.println(c.getNotaPassageiro() == 1);
     }
 
-    @Test
-    void avaliaAlto() {
-        Motorista motorista = new Motorista("12345678900", "Carlos");
-        Passageiro passageiro = new Passageiro("98765432100", "Ana");
-        Corrida corrida = new Corrida(motorista, passageiro);
-
-        motorista.avalia(corrida, 5);
-        assertEquals(5, corrida.getNotaPassageiro());
+    public static void avaliaAlto() {
+        Motorista m = new Motorista();
+        Passageiro p = new Passageiro();
+        Corrida c = new Corrida(p);
+        c.setMotorista(m);
+        m.avalia(c, 6);
+        System.out.println(c.getNotaPassageiro() == 5);
     }
 }

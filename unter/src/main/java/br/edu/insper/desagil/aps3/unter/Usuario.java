@@ -1,3 +1,5 @@
+package br.edu.insper.desagil.aps3.unter;
+
 public class Usuario {
     private String cpf;
     private String nome;
@@ -15,5 +17,12 @@ public class Usuario {
         return nome;
     }
 
-    public void avalia(Corrida corrida, int nota);
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public void avalia(Corrida corrida, int nota) {
+        // Implementação deve ser feita nas subclasses
+        throw new UnsupportedOperationException("Metodo deve ser implementado nas subclasses");
+    }
 }
