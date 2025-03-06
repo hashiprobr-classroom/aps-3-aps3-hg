@@ -46,6 +46,6 @@ public class Central {
 
 
     public List<Corrida> getCorridas() {
-        return new ArrayList<>(corridas); 
+        return new ArrayList<>(corridas);
     }
 }
